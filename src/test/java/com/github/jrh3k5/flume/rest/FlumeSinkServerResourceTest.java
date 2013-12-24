@@ -51,7 +51,7 @@ public class FlumeSinkServerResourceTest {
 
         assertThat(resource.getEvents().getEntity()).isEqualTo(new Event[] { stored });
         resource.deleteEvents();
-        assertThat((Event[]) resource.getEvents().getEntity()).isEmpty();
+        assertThat((Object[]) resource.getEvents().getEntity()).isEmpty();
     }
 
     /**
@@ -80,7 +80,7 @@ public class FlumeSinkServerResourceTest {
     public void testStoreEvents() throws Exception {
         final SimpleEvent stored = mock(SimpleEvent.class);
         final Response postResponse = resource.storeEvents(new SimpleEvent[] { stored }, uriInfo);
-        assertThat(postResponse.getStatus()).isEqualTo(Response.Status.OK.getStatusCode());
-        assertThat(postResponse.getLocation()).isEqualTo(Response.Status.CREATED.getStatusCode());
+        assertThat(postResponse.getStatus()).isEqualTo(Response.Status.CREATED.getStatusCode());
+        assertThat(postResponse.getLocation()).isEqualTo(baseUri.resolve("events"));
     }
 }
