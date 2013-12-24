@@ -24,8 +24,8 @@ public class FlumeSinkServer {
      *            The port on which the HTTP server will listen for requests.
      */
     public FlumeSinkServer(String bindAddress, int serverPort) {
-        final ResourceConfig rc = new ResourceConfig().packages(FlumeSinkServerResource.class.getPackage().getName());
-        server = GrizzlyHttpServerFactory.createHttpServer(URI.create(String.format("http://%s:%d", bindAddress, serverPort)), rc);
+        final ResourceConfig resourceConfig = new ResourceConfig().packages(FlumeSinkServerResource.class.getPackage().getName());
+        server = GrizzlyHttpServerFactory.createHttpServer(URI.create(String.format("http://%s:%d", bindAddress, serverPort)), resourceConfig);
     }
 
     /**
