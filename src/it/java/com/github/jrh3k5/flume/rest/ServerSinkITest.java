@@ -15,7 +15,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-public class ServerSinkTest {
+public class ServerSinkITest {
     private final MemoryChannel channel = new MemoryChannel();
     private final ServerSink serverSink = new ServerSink();
     private final Context context = new Context();
