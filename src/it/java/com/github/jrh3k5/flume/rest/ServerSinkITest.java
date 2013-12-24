@@ -15,12 +15,24 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+/**
+ * Integration tests for {@link ServerSink}.
+ * 
+ * @author Joshua Hyde
+ */
+
 public class ServerSinkITest {
     private final MemoryChannel channel = new MemoryChannel();
     private final ServerSink serverSink = new ServerSink();
     private final Context context = new Context();
     private final ServerSinkClient sinkClient = new ServerSinkClient(1337);
 
+    /**
+     * Start the sink.
+     * 
+     * @throws Exception
+     *             If any errors occur during the startup.
+     */
     @Before
     public void startSink() throws Exception {
         channel.configure(context);
@@ -31,6 +43,12 @@ public class ServerSinkITest {
         serverSink.start();
     }
 
+    /**
+     * Close and clean up the sink after each test.
+     * 
+     * @throws Exception
+     *             If any errors occur during the cleanup.
+     */
     @After
     public void closeSink() throws Exception {
         sinkClient.close();
