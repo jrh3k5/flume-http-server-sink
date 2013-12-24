@@ -22,10 +22,11 @@ import org.junit.Test;
  */
 
 public class ServerSinkITest {
+    private final int serverPort = 7890;
     private final MemoryChannel channel = new MemoryChannel();
     private final ServerSink serverSink = new ServerSink();
     private final Context context = new Context();
-    private final ServerSinkClient sinkClient = new ServerSinkClient(1337);
+    private final ServerSinkClient sinkClient = new ServerSinkClient(serverPort);
 
     /**
      * Start the sink.
@@ -35,6 +36,8 @@ public class ServerSinkITest {
      */
     @Before
     public void startSink() throws Exception {
+        context.put("server.http.port", Integer.toString(serverPort));
+
         channel.configure(context);
         channel.start();
 
