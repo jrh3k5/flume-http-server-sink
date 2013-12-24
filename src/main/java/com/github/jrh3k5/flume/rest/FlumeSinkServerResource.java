@@ -19,27 +19,60 @@ import javax.ws.rs.core.UriInfo;
 import org.apache.flume.Event;
 import org.apache.flume.event.SimpleEvent;
 
+/**
+ * A JAX-RS resource that accepts and exposes Flume events via JSON.
+ * <p />
+ * Events - accepted and retrieved - follow this form:
+ * 
+ * <pre>
+ * [
+ *   {
+ *     "headers": {
+ *       "header_one" : "Header #1",
+ *       "header_two" : "Header #2"
+ *     }
+ *     "body" : "&lt;base64-encoded form of the body&gt;"
+ *   }
+ *   ...
+ * ]
+ * </pre>
+ * 
+ * @author Joshua Hyde
+ * 
+ */
+
 @Path("/")
 public class FlumeSinkServerResource {
     private static final List<Event> EVENTS = new ArrayList<Event>();
     private final ReadWriteLock eventsLock = new ReentrantReadWriteLock();
 
-    @POST
+    /**
+     * Delete all stored events.
+     * 
+     * @return A {@link Response} indicating the status of the deletion attempt.
+     * @throws Exception
+     *             If any errors occur during the deletion.
+     */
+    @DELETE
     @Path("events")
-    @Consumes("application/json")
-    public Response storeEvents(SimpleEvent[] incomingEvents, @Context UriInfo uriInfo) throws Exception {
+    public Response deleteEvents() throws Exception {
         final Lock writeLock = eventsLock.writeLock();
         writeLock.lock();
         try {
-            for (SimpleEvent incomingEvent : incomingEvents) {
-                EVENTS.add(incomingEvent);
-            }
-            return Response.created(uriInfo.getBaseUri().resolve("events")).build();
+            EVENTS.clear();
+            return Response.ok().build();
         } finally {
             writeLock.unlock();
         }
     }
 
+    /**
+     * Get all stored events.
+     * 
+     * @return A {@link Response} containing an array of the stored events.
+     * @throws Exception
+     *             If any errors occur during the retrieval.
+     */
     @GET
     @Path("events")
     @Produces("application/json")
@@ -53,14 +86,28 @@ public class FlumeSinkServerResource {
         }
     }
 
-    @DELETE
+    /**
+     * Store events in the server.
+     * 
+     * @param incomingEvents
+     *            An array of {@link SimpleEvent} objects representing the events to store.
+     * @param uriInfo
+     *            A {@link UriInfo} object representing the URI information of the current request.
+     * @return A {@link Response} indicating the state of the storage.
+     * @throws Exception
+     *             If any errors occur during the storage of data.
+     */
+    @POST
     @Path("events")
-    public Response deleteEvents() throws Exception {
+    @Consumes("application/json")
+    public Response storeEvents(SimpleEvent[] incomingEvents, @Context UriInfo uriInfo) throws Exception {
         final Lock writeLock = eventsLock.writeLock();
         writeLock.lock();
         try {
-            EVENTS.clear();
-            return Response.ok().build();
+            for (SimpleEvent incomingEvent : incomingEvents) {
+                EVENTS.add(incomingEvent);
+            }
+            return Response.created(uriInfo.getBaseUri().resolve("events")).build();
         } finally {
             writeLock.unlock();
         }
