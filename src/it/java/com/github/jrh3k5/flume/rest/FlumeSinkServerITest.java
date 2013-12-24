@@ -44,6 +44,9 @@ public class FlumeSinkServerITest {
     public void setUpClient() throws Exception {
         final Configuration clientConfig = new ClientConfig(JacksonJsonProvider.class);
         client = ClientBuilder.newClient(clientConfig);
+
+        // Clear any events that may have been stored by previous tests
+        client.target(server.getBaseUri()).path("events").request().delete();
     }
 
     /**
@@ -82,8 +85,7 @@ public class FlumeSinkServerITest {
         toPost.setHeaders(Collections.singletonMap("a-header", UUID.randomUUID().toString()));
         toPost.setBody(UUID.randomUUID().toString().getBytes("utf-8"));
 
-        final Response postResponse = client.target(URI.create(String.format("http://%s:%d", bindAddress, serverPort))).path("events").request()
-                .post(Entity.entity(new Event[] { toPost }, MediaType.APPLICATION_JSON_TYPE));
+        final Response postResponse = client.target(server.getBaseUri()).path("events").request().post(Entity.entity(new Event[] { toPost }, MediaType.APPLICATION_JSON_TYPE));
         assertThat(postResponse.getStatus()).isEqualTo(Response.Status.CREATED.getStatusCode());
 
         final URI postLocation = postResponse.getLocation();

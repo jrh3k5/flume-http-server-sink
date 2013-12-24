@@ -44,6 +44,9 @@ public class ServerSinkITest {
         serverSink.configure(context);
         serverSink.setChannel(channel);
         serverSink.start();
+
+        // Previous tests may have put events in the static list - clear it out
+        sinkClient.clearEvents();
     }
 
     /**

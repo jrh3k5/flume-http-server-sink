@@ -29,12 +29,6 @@
     <dependencySets>
         <dependencySet>
             <outputDirectory>/libext</outputDirectory>
-            <excludes>
-                <!-- Flume provides its own implementation of slf4j-log4j12, so don't bundle it into the plugin itself -->
-                <exclude>org.slf4j:slf4j-log4j12</exclude>
-                <!-- Don't bundle POM files -->
-                <exclude>*:*:pom</exclude>
-            </excludes>
         </dependencySet>
     </dependencySets>
 </assembly>
