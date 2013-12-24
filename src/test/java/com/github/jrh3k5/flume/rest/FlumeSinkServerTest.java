@@ -1,5 +1,6 @@
 package com.github.jrh3k5.flume.rest;
 
+import static org.fest.assertions.Assertions.assertThat;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.powermock.api.mockito.PowerMockito.mock;
@@ -27,6 +28,8 @@ import org.powermock.modules.junit4.PowerMockRunner;
 @RunWith(PowerMockRunner.class)
 @PrepareForTest({ FlumeSinkServer.class, GrizzlyHttpServerFactory.class, ResourceConfig.class })
 public class FlumeSinkServerTest {
+    private final String bindAddress = "a.server";
+    private final int serverPort = 748392;
     @Mock
     private HttpServer httpServer;
     private FlumeSinkServer sinkServer;
@@ -38,8 +41,6 @@ public class FlumeSinkServerTest {
      */
     @Before
     public void setUpServer() throws Exception {
-        final String bindAddress = "a.server";
-        final int serverPort = 748392;
 
         final String resourcePackageName = FlumeSinkServerResource.class.getPackage().getName();
         final ResourceConfig resourceConfig = mock(ResourceConfig.class);
@@ -52,6 +53,17 @@ public class FlumeSinkServerTest {
         sinkServer = new FlumeSinkServer(bindAddress, serverPort);
 
         verify(resourceConfig).packages(resourcePackageName);
+    }
+
+    /**
+     * Test the retrieval of the base URI.
+     * 
+     * @throws Exception
+     *             If any errors occur during the test run.
+     */
+    @Test
+    public void testGetBaseUri() throws Exception {
+        assertThat(sinkServer.getBaseUri()).isEqualTo(URI.create(String.format("http://%s:%d", bindAddress, serverPort)));
     }
 
     /**

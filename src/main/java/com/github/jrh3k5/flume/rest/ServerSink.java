@@ -89,7 +89,7 @@ public class ServerSink extends AbstractSink implements Configurable {
 
         final Configuration clientConfig = new ClientConfig(JacksonJsonProvider.class);
         client = ClientBuilder.newClient(clientConfig);
-        eventsTarget = client.target(String.format("http://%s:%d", bindAddress, serverPort)).path("events");
+        eventsTarget = client.target(server.getBaseUri()).path("events");
     }
 
     @Override

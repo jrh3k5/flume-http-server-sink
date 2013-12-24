@@ -14,6 +14,7 @@ import org.glassfish.jersey.server.ResourceConfig;
 
 public class FlumeSinkServer {
     private final HttpServer server;
+    private final URI baseUri;
 
     /**
      * Create a server.
@@ -24,8 +25,18 @@ public class FlumeSinkServer {
      *            The port on which the HTTP server will listen for requests.
      */
     public FlumeSinkServer(String bindAddress, int serverPort) {
+        this.baseUri = URI.create(String.format("http://%s:%d", bindAddress, serverPort));
         final ResourceConfig resourceConfig = new ResourceConfig().packages(FlumeSinkServerResource.class.getPackage().getName());
-        server = GrizzlyHttpServerFactory.createHttpServer(URI.create(String.format("http://%s:%d", bindAddress, serverPort)), resourceConfig);
+        server = GrizzlyHttpServerFactory.createHttpServer(baseUri, resourceConfig);
+    }
+
+    /**
+     * Get the base URI at which the server is accepting requests.
+     * 
+     * @return A {@link URI} representing the base URI.
+     */
+    public URI getBaseUri() {
+        return baseUri;
     }
 
     /**
