@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.flume.rest;
+package org.apache.flume.sink.http.server;
 
 import static org.fest.assertions.Assertions.assertThat;
 
@@ -28,6 +28,8 @@ import org.apache.flume.Event;
 import org.apache.flume.Transaction;
 import org.apache.flume.channel.MemoryChannel;
 import org.apache.flume.event.SimpleEvent;
+import org.apache.flume.sink.http.server.ServerSink;
+import org.apache.flume.sink.http.server.ServerSinkClient;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.flume.rest;
+package org.apache.flume.sink.http.server;
 
 import static org.fest.assertions.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
@@ -28,6 +28,7 @@ import javax.ws.rs.core.UriInfo;
 
 import org.apache.flume.Event;
 import org.apache.flume.event.SimpleEvent;
+import org.apache.flume.sink.http.server.FlumeSinkServerResource;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

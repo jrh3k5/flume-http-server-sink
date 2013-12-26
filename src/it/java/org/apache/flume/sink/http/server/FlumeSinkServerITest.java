@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.flume.rest;
+package org.apache.flume.sink.http.server;
 
 import static org.fest.assertions.Assertions.assertThat;
 
@@ -32,6 +32,7 @@ import javax.ws.rs.core.Response;
 
 import org.apache.flume.Event;
 import org.apache.flume.event.SimpleEvent;
+import org.apache.flume.sink.http.server.FlumeSinkServer;
 import org.glassfish.jersey.client.ClientConfig;
 import org.junit.After;
 import org.junit.Before;

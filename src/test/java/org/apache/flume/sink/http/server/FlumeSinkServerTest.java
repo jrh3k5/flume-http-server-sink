@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.flume.rest;
+package org.apache.flume.sink.http.server;
 
 import static org.fest.assertions.Assertions.assertThat;
 import static org.mockito.Mockito.verify;
@@ -26,6 +26,8 @@ import static org.powermock.api.mockito.PowerMockito.whenNew;
 
 import java.net.URI;
 
+import org.apache.flume.sink.http.server.FlumeSinkServer;
+import org.apache.flume.sink.http.server.FlumeSinkServerResource;
 import org.glassfish.grizzly.http.server.HttpServer;
 import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
 import org.glassfish.jersey.server.ResourceConfig;
