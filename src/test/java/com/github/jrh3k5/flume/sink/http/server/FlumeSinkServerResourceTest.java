@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.github.jrh3k5.flume.rest;
+package com.github.jrh3k5.flume.sink.http.server;
 
 import static org.fest.assertions.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
@@ -33,6 +33,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
+
+import com.github.jrh3k5.flume.sink.http.server.FlumeSinkServerResource;
 
 /**
  * Unit tests for {@link FlumeSinkServerResource}.

@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.github.jrh3k5.flume.rest;
+package com.github.jrh3k5.flume.sink.http.server;
 
 import java.util.ArrayList;
 import java.util.List;

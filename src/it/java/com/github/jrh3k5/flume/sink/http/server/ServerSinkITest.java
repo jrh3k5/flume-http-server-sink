@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.github.jrh3k5.flume.rest;
+package com.github.jrh3k5.flume.sink.http.server;
 
 import static org.fest.assertions.Assertions.assertThat;
 
@@ -31,6 +31,9 @@ import org.apache.flume.event.SimpleEvent;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
+import com.github.jrh3k5.flume.sink.http.server.ServerSink;
+import com.github.jrh3k5.flume.sink.http.server.ServerSinkClient;
 
 /**
  * Integration tests for {@link ServerSink}.

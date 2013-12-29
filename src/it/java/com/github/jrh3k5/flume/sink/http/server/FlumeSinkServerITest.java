@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.github.jrh3k5.flume.rest;
+package com.github.jrh3k5.flume.sink.http.server;
 
 import static org.fest.assertions.Assertions.assertThat;
 
@@ -38,6 +38,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider;
+import com.github.jrh3k5.flume.sink.http.server.FlumeSinkServer;
 
 /**
  * Integration tests for {@link FlumeSinkServer}.
