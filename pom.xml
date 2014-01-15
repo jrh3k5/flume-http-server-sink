@@ -35,7 +35,7 @@ limitations under the License.
     </properties>
     <issueManagement>
         <system>GitHub</system>
-        <url>https://github.com/jrh3k5/flume-plugin-maven-plugin/issues</url>
+        <url>https://github.com/jrh3k5/flume-http-server-sink/issues</url>
     </issueManagement>
     <licenses>
         <license>
