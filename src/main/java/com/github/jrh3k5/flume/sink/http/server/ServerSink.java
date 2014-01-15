@@ -33,6 +33,7 @@ import org.apache.flume.Event;
 import org.apache.flume.EventDeliveryException;
 import org.apache.flume.Transaction;
 import org.apache.flume.conf.Configurable;
+import org.apache.flume.instrumentation.SinkCounter;
 import org.apache.flume.sink.AbstractSink;
 import org.glassfish.jersey.client.ClientConfig;
 
@@ -59,12 +60,16 @@ public class ServerSink extends AbstractSink implements Configurable {
     private int batchSize;
     private FlumeSinkServer server;
     private WebTarget eventsTarget;
+    private SinkCounter sinkCounter;
 
     @Override
     public void configure(Context context) {
         serverPort = context.getInteger("server.http.port", 1337);
         batchSize = context.getInteger("batchSize", 1000);
         bindAddress = context.getString("http.server.address.bind", "0.0.0.0");
+        if (sinkCounter == null) {
+            sinkCounter = new SinkCounter(getName());
+        }
     }
 
     @Override
